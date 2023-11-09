@@ -63,7 +63,7 @@ class RecipeView extends View {
               <use href="${icons}#icon-clock"></use>
             </svg>
             <span class="recipe__info-data recipe__info-data--minutes">${
-              this._data.cookTime
+              this._data.cookingTime
             }</span>
             <span class="recipe__info-text">minutes</span>
           </div>
