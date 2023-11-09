@@ -263,17 +263,47 @@
         <div class="upload__column">
           <h3 class="upload__heading">Recipe data</h3>
           <label>Title</label>
-          <input value="TEST" required name="title" type="text" />
+          <input value="TEST" id="title" required name="title" type="text" />
+          <span class="errormsg" aria-live="polite"></span>
           <label>URL</label>
-          <input value="TEST123" required name="sourceUrl" type="text" />
+          <input
+            value="TEST123"
+            id="sourceUrl"
+            required
+            name="sourceUrl"
+            type="url"
+          />
+          <span class="errormsg" aria-live="polite"></span>
           <label>Image URL</label>
-          <input value="TEST123" required name="image" type="text" />
+          <input value="TEST123" required id="image" name="image" type="url" />
+          <span class="errormsg" aria-live="polite"></span>
           <label>Publisher</label>
-          <input value="TEST" required name="publisher" type="text" />
+          <input
+            value="TEST"
+            required
+            id="publisher"
+            name="publisher"
+            type="text"
+          />
+          <span class="errormsg" aria-live="polite"></span>
           <label>Prep time</label>
-          <input value="23" required name="cookingTime" type="number" />
+          <input
+            value="23"
+            required
+            id="cookingTime"
+            name="cookingTime"
+            type="number"
+          />
+          <span class="errormsg" aria-live="polite"></span>
           <label>Servings</label>
-          <input value="23" required name="servings" type="number" />
+          <input
+            value="23"
+            required
+            id="servings"
+            name="servings"
+            type="number"
+          />
+          <span class="errormsg" aria-live="polite"></span>
         </div>
 
         <div class="upload__column">
@@ -286,6 +316,7 @@
             name="ingredient-1"
             placeholder="Format: 'Quantity,Unit,Description'"
           />
+          <span class="errormsg" aria-live="polite"></span>
           <label>Ingredient 2</label>
           <input
             value="1,,Avocado"
@@ -293,6 +324,7 @@
             name="ingredient-2"
             placeholder="Format: 'Quantity,Unit,Description'"
           />
+          <span class="errormsg" aria-live="polite"></span>
           <label>Ingredient 3</label>
           <input
             value=",,salt"
@@ -300,24 +332,28 @@
             name="ingredient-3"
             placeholder="Format: 'Quantity,Unit,Description'"
           />
+          <span class="errormsg" aria-live="polite"></span>
           <label>Ingredient 4</label>
           <input
             type="text"
             name="ingredient-4"
             placeholder="Format: 'Quantity,Unit,Description'"
           />
+          <span class="errormsg" aria-live="polite"></span>
           <label>Ingredient 5</label>
           <input
             type="text"
             name="ingredient-5"
             placeholder="Format: 'Quantity,Unit,Description'"
           />
+          <span class="errormsg" aria-live="polite"></span>
           <label>Ingredient 6</label>
           <input
             type="text"
             name="ingredient-6"
             placeholder="Format: 'Quantity,Unit,Description'"
           />
+          <span class="errormsg" aria-live="polite"></span>
         </div>
 
         <button class="btn upload__btn">
