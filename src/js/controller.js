@@ -20,7 +20,6 @@ if (module.hot) {
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
-    console.log(id);
 
     if (!id) return;
 
@@ -62,6 +61,7 @@ const controlSearchResults = async function () {
     paginationView.render(model.state.search);
   } catch (err) {
     console.log(err);
+    resultsView.renderErrorMessage(err.message);
   }
 };
 
@@ -90,14 +90,12 @@ const controlBookmarks = function () {
 };
 
 const controlAddRecipe = async function (newRecipe) {
-  //console.log(newRecipe);
   try {
     //show spinner
     addRecipeView.renderSpinner();
 
     //upload recipe data
     await model.uploadRecipe(newRecipe);
-    console.log(model.state.recipe);
 
     //render recipe
     recipeView.render(model.state.recipe);
@@ -114,6 +112,8 @@ const controlAddRecipe = async function (newRecipe) {
     //close the form window
     setTimeout(function () {
       addRecipeView.toggleWindow();
+      //reset form
+      location.reload();
     }, MODAL_CLOSE_SEC * 1000);
   } catch (err) {
     console.error('💥', err);
@@ -128,7 +128,6 @@ const init = function () {
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
   addRecipeView.addHandlerUpload(controlAddRecipe);
-  console.log('testing git!');
 };
 
 init();
