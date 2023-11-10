@@ -1,4 +1,5 @@
 import View from './view.js';
+import FormValidator from '../formValidator.js';
 import icons from 'url:../../img/icons.svg';
 class AddRecipeView extends View {
   _parentElement = document.querySelector('.upload');
@@ -23,19 +24,6 @@ class AddRecipeView extends View {
     this._overlay.classList.toggle('hidden');
     this._window.classList.toggle('hidden');
   }
-  _deleteMessage(el) {
-    el.innerText = '';
-  }
-  _clearErrorMessages() {
-    const errorElements = document.querySelectorAll('.errormsg');
-
-    errorElements.forEach(el => {
-      this._deleteMessage(el);
-    });
-  }
-  _resetValidateStatus() {
-    this._validateStatus = '';
-  }
 
   _addHandlerShowWindow() {
     this._btnOpen.addEventListener('click', this.toggleWindow.bind(this));
@@ -47,16 +35,11 @@ class AddRecipeView extends View {
 
   addHandlerUpload(handler) {
     let self = this;
+    const formValidator = new FormValidator(self._parentElement, self._fields);
     this._parentElement.addEventListener('submit', function (e) {
       e.preventDefault();
-      self._resetValidateStatus();
-      self._clearErrorMessages();
+      self._validateStatus = formValidator.validateOnSubmit();
 
-      self._fields.forEach(field => {
-        const input = document.querySelector(`#${field}`);
-        self._validateFields(input);
-      });
-      console.log(self._validateStatus);
       if (self._validateStatus === 'error') return;
 
       const dataArr = [...new FormData(this)]; //this here is form
@@ -66,27 +49,6 @@ class AddRecipeView extends View {
     });
   }
   _generateMarkup() {}
-
-  _validateFields(field) {
-    //non-blank or non-space
-    if (field.value.trim() === '') {
-      this._setStatus(
-        field,
-        `${field.previousElementSibling.innerText} cannot be blank!`,
-        'error'
-      );
-    }
-  }
-  _setStatus(field, message, validationStatus) {
-    const errorMsgEl = field.nextElementSibling;
-    if (validationStatus === 'error') {
-      this._validateStatus =
-        this._validateStatus !== 'error' ? 'error' : this._validateStatus;
-
-      errorMsgEl.innerText = '';
-      errorMsgEl.innerText = message;
-    }
-  }
 }
 
 export default new AddRecipeView();
