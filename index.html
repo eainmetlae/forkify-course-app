@@ -267,7 +267,7 @@
           <span class="errormsg" aria-live="polite"></span>
           <label>URL</label>
           <input
-            value="TEST123"
+            value="http://TEST123.io"
             id="sourceUrl"
             required
             name="sourceUrl"
@@ -275,7 +275,13 @@
           />
           <span class="errormsg" aria-live="polite"></span>
           <label>Image URL</label>
-          <input value="TEST123" required id="image" name="image" type="url" />
+          <input
+            value="http://TEST123.io"
+            required
+            id="image"
+            name="image"
+            type="url"
+          />
           <span class="errormsg" aria-live="polite"></span>
           <label>Publisher</label>
           <input
@@ -306,7 +312,7 @@
           <span class="errormsg" aria-live="polite"></span>
         </div>
 
-        <div class="upload__column">
+        <!-- <div class="upload__column">
           <h3 class="upload__heading">Ingredients</h3>
           <label>Ingredient 1</label>
           <input
@@ -354,8 +360,47 @@
             placeholder="Format: 'Quantity,Unit,Description'"
           />
           <span class="errormsg" aria-live="polite"></span>
-        </div>
+        </div> -->
 
+        <div class="upload__column">
+          <h3 class="upload__heading">Ingredients</h3>
+          <div class="upload__ingredientContainer">
+            Start by adding some ingredients.
+          </div>
+          <label>Quantity</label>
+          <input
+            class="add-ingredient"
+            value="0.5"
+            type="text"
+            name="ing-quantity"
+            placeholder="Enter quantity"
+          />
+          <span class="errormsg" aria-live="polite"></span>
+          <label>Unit</label>
+          <input
+            class="add-ingredient"
+            value="kg"
+            type="text"
+            name="ing-unit"
+            placeholder="Enter unit"
+          />
+          <span class="errormsg" aria-live="polite"></span>
+          <label>Description</label>
+          <input
+            class="add-ingredient"
+            value="flour"
+            type="text"
+            name="ing-description"
+            placeholder="Enter description"
+          />
+          <span class="errormsg" aria-live="polite"></span>
+          <button class="btn--inline btn_add-ingredient">
+            <svg>
+              <use href="src/img/icons.svg#icon-plus-circle"></use>
+            </svg>
+            <span>Add Ingredient</span>
+          </button>
+        </div>
         <button class="btn upload__btn">
           <svg>
             <use href="src/img/icons.svg#icon-upload-cloud"></use>
