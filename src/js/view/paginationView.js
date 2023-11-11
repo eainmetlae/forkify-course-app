@@ -20,21 +20,21 @@ class PaginationView extends View {
     );
     // Page 1, and there are other pages
     if (curPage === 1 && numPages > 1)
-      return this.#generateMarkupButton(curPage, false, true);
+      return this.#generateMarkupButton(curPage, false, true, numPages);
 
     // last page
     if (curPage === numPages && numPages > 1)
-      return this.#generateMarkupButton(curPage, true, false);
+      return this.#generateMarkupButton(curPage, true, false, numPages);
 
     // Other page
     if (curPage < numPages)
-      return this.#generateMarkupButton(curPage, true, true);
+      return this.#generateMarkupButton(curPage, true, true, numPages);
 
     // Page 1, and there are no other pages
     return '';
   }
 
-  #generateMarkupButton(pageNum, isPrev = false, isNext = false) {
+  #generateMarkupButton(pageNum, isPrev = false, isNext = false, totalPages) {
     let markup = '';
     if (isPrev)
       markup = `<button data-goto = "${
@@ -46,6 +46,9 @@ class PaginationView extends View {
         <span>Page ${pageNum - 1}</span>
       </button>`;
 
+    markup += `<div>
+      page ${pageNum} of ${totalPages}
+      </div>`;
     if (isNext)
       markup += ` <button  data-goto = "${
         pageNum + 1
