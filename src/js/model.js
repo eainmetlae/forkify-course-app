@@ -8,6 +8,7 @@ export const state = {
     results: [],
     page: 1,
     resultsPerPage: RESULTS_PER_PAGE,
+    sort: { key: null, order: 'asc' },
   },
   bookmarks: [],
 };
@@ -35,8 +36,6 @@ export const loadRecipe = async function (id) {
     if (state.bookmarks.some(bookmark => bookmark.id === state.recipe.id))
       state.recipe.bookmarked = true;
     else state.recipe.bookmarked = false;
-
-    console.log(state.recipe);
   } catch (err) {
     console.log(err);
     throw err;
@@ -109,7 +108,6 @@ const init = function () {
 };
 
 init();
-console.log(state.bookmarks);
 
 export const uploadRecipe = async function (newRecipe) {
   //console.log(Object.entries(newRecipe));
@@ -123,10 +121,10 @@ export const uploadRecipe = async function (newRecipe) {
             'Wrong ingredient format! Please use the correct format ;)'
           );
         const [quantity, unit, description] = ingArr;
-        console.log(quantity, unit, description);
+
         return { quantity: quantity ? +quantity : null, unit, description };
       });
-    console.log(ingredients);
+
     const recipe = {
       title: newRecipe.title,
       source_url: newRecipe.sourceUrl,
@@ -144,4 +142,34 @@ export const uploadRecipe = async function (newRecipe) {
   } catch (err) {
     throw err;
   }
+};
+
+/* working but no data to test because API didn't return full details of recipe for search results */
+export const sortSearchResults = function (
+  sortBy = state.search.sort.key,
+  order = state.search.sort.order
+) {
+  state.search.sort.key = sortBy;
+  state.search.sort.order = order;
+  //console.log(state.search.results);
+  if (state.search.sort.key && state.search.results)
+    state.search.results = sortArrayByKey(state.search.results, sortBy, order);
+};
+
+const sortArrayByKey = function (arr, key, order) {
+  //console.log(arr);
+  if (key === 'ingredients')
+    arr.sort((a, b) =>
+      order === 'asc'
+        ? a[key].length - b[key].length
+        : b[key].length - a[key].length
+    );
+
+  if (key === 'cookingTime')
+    arr.sort((a, b) =>
+      order === 'asc' ? +a[key] - +b[key] : +b[key] - +a[key]
+    );
+
+  console.log(arr);
+  return arr;
 };

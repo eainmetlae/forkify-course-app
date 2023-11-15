@@ -59,6 +59,9 @@ const controlSearchResults = async function () {
     resultsView.render(model.getSearchResultsPage());
     //4) render pagination buttons
     paginationView.render(model.state.search);
+
+    //5) display sort menu
+    resultsView.toggleSortMenu();
   } catch (err) {
     console.log(err);
     resultsView.renderErrorMessage(err.message);
@@ -120,6 +123,17 @@ const controlAddRecipe = async function (newRecipe) {
     addRecipeView.renderErrorMessage(err.message);
   }
 };
+
+const controlSort = function (sortByVal) {
+  if (!sortByVal) return;
+
+  const { sortBy, order } = sortByVal;
+  model.sortSearchResults(sortBy, order);
+
+  if (model.state.search.results)
+    resultsView.render(model.getSearchResultsPage());
+};
+
 const init = function () {
   bookmarksView.addHandlerBookmark(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
@@ -128,6 +142,8 @@ const init = function () {
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
   addRecipeView.addHandlerUpload(controlAddRecipe);
+
+  resultsView.addHandlerSort(controlSort);
 };
 
 init();

@@ -85,6 +85,62 @@
       </header>
 
       <div class="search-results">
+        <div class="sort-panel">
+          <!-- <select id="sort-menu">
+            <option value="">-Sort by-</option>
+            <option value="cookingTime-asc">Cooking time(ascending)</option>
+            <option value="cookingTime-desc">Cooking time(descending)</option>
+            <option value="ingredients-asc">
+              No. of ingredients(ascending)
+            </option>
+            <option value="ingredients-desc">
+              No. of ingredients(ascending)
+            </option>
+          </select> -->
+          <button class="nav__btn btn--inline nav__btn--sort hidden">
+            <span>SORT</span>
+          </button>
+          <div class="sort-menu">
+            <form class="sort-form">
+              <p>Sort By:</p>
+              <div class="sort-by-keys">
+                <div>
+                  <input
+                    type="radio"
+                    id="cookingTime"
+                    name="sortBy"
+                    value="cookingTime"
+                  />
+                  <label for="cookingTime">Cooking Time</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="ingredients"
+                    name="sortBy"
+                    value="ingredients"
+                  />
+                  <label for="ingredients">No. of Ingredients</label>
+                </div>
+              </div>
+
+              <p>Order:</p>
+              <div class="sort-by-order">
+                <div>
+                  <input type="radio" id="asc" name="order" value="asc" />
+                  <label for="asc">Ascending</label>
+                </div>
+                <div>
+                  <input type="radio" id="desc" name="order" value="desc" />
+                  <label for="desc">Descending</label>
+                </div>
+              </div>
+              <button class="btn btn--submitsort">
+                <span>Sort</span>
+              </button>
+            </form>
+          </div>
+        </div>
         <ul class="results">
           <!-- 
           <li class="preview">
